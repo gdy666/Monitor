@@ -56,8 +56,8 @@ int get_hcsr501(serial *s,struct HCSR501* data)
 	usleep(90000);
 	serial_read(s, buffer, '\n', 128);
 	sscanf(buffer,"%*s%*s%d",&data->state);
-	printf("data->state :%d \n",data->state);
-	if(data->state!=0||data->state!=1){
+//	printf("data->state :%d \n",data->state);
+	if(data->state!=0&&data->state!=1){
 		state=1;
 	}
 	return state;

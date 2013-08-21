@@ -9,11 +9,14 @@
 
 
 #include "feixin.h"
-#include "monitor_base.h"
+#include "monitor.h"
+
+#define DEBUG
 
 void debug(const char *fmt, ...)
 {
 	#ifdef DEBUG
+		#include <stdarg.h>
 		 va_list ap;
 		 va_start(ap, fmt);
 		 vprintf(fmt, ap);
@@ -23,12 +26,16 @@ void debug(const char *fmt, ...)
 
 int main()
 {
-	//send_feition("13527029922","cheng989","18007596682","this is a test.");
-	struct ip_list* ip_list=NULL;
-	get_broadip(&ip_list);
-	struct ip_list* next=ip_list;
-	while(next){
-		printf("IP:%s\n",next->ip);
-		next=next->next;
-	}
+	start_monitor();
+	while(1);
+//	send_feition("13527029922","cheng989","18007596682","this is a test.");
+//	struct ip_list* ip_list=NULL;
+//	get_broadip(&ip_list);
+//	struct ip_list* next=ip_list;
+//	while(next){
+//	//	printf("IP:%s\n",next->ip);
+//		send_broadcast(next->ip,1110,"update info");
+//		next=next->next;
+//	}
+//	free_iplist(ip_list);
 }

@@ -20,7 +20,7 @@
  * content：内容
  * 返回值为0时发送成功，返回值为1时发送失败。
  */
-#define FEITION_URL "http://yeso.me/fetion/feixin.php"
+#define FEITION_URL "http://sendfetion.sinaapp.com/feixin.php"
 int send_feition(
 		const char* user,
 		const char*passwd,

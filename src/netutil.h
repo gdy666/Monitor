@@ -24,7 +24,7 @@
 #include <net/if.h>
 #include <sys/ioctl.h>
 
-#define BRO_PORT 1110
+
 
 //存储IP列表的结构体
 struct ip_list{
@@ -32,12 +32,23 @@ struct ip_list{
 	struct ip_list* next;
 };
 
-//获取到本地所有网卡的广播地址
+/*
+ * 获取到本地所有网卡的广播地址
+ * 保存到ip_list中
+ * 正常获取返回网卡数量，异常返回-1
+ */
 int get_broadip(struct ip_list** ip_list);
 /*
  * 发送广播
- * 参数为广播地址
+ * 参数
+ * ipaddr:广播地址
+ * content:广播内容
  */
-int send_broadcast(const char* ipaddr);
+int send_broadcast(const char* ipaddr,int port,const char* content);
+
+/*
+ * 清空ip_list申请的空间
+ */
+int free_iplist(struct ip_list* ip_list);
 
 #endif /* MONITOR_BASE_H_ */

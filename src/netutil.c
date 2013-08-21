@@ -7,16 +7,15 @@
  *		e-mail: cheng@yeso.me
  */
 
-#include "monitor_base.h"
-//struct bro_ip_list* ip_list=NULL;
+#include "netutil.h"
 
-int send_broadcast(const char* ipaddr)
+int send_broadcast(const char* ipaddr,int port,const char* content)
 {
 	struct sockaddr_in s_addr;
 	int sock;
 	int addr_len;
 	int len;
-	char buff[32];
+	//char buff[32];
 	int yes;
 	/*创建socket*/
 	if((sock=socket(AF_INET,SOCK_DGRAM,0))==-1){
@@ -29,16 +28,16 @@ int send_broadcast(const char* ipaddr)
 
 	/*设置对方地址和端口信息*/
 	s_addr.sin_family=AF_INET;
-	s_addr.sin_port=htons(BRO_PORT);
+	s_addr.sin_port=htons(port);
 	s_addr.sin_addr.s_addr=inet_addr(ipaddr);	//广播
 
 	/*发送UDP消息*/
 	addr_len=sizeof(s_addr);
-	strcpy(buff,"update info");
+	//strcpy(buff,"update info");
 	int count=0;
 
 	for(;count<3;count++){	//重复发送3次广播，防止广播丢失
-		len=sendto(sock,buff,strlen(buff),0,(struct sockaddr*)&s_addr,addr_len);
+		len=sendto(sock,content,strlen(content),0,(struct sockaddr*)&s_addr,addr_len);
 		if(len<0){
 			debug("\n\r 发送更新广播失败.\n\r");
 			return -1;
@@ -89,6 +88,7 @@ int get_broadip(struct ip_list** ip_list)
     close(fd);
 
     struct ip_list* next;
+    int count=0;
     for(i=0; i<num; i++)
     {
         tmp_ip = inet_ntoa(((struct sockaddr_in*)(&ifq[i].ifr_broadaddr))-> sin_addr);
@@ -105,7 +105,20 @@ int get_broadip(struct ip_list** ip_list)
         	}
         	next->ip=(char *)malloc(16 * sizeof(char));
 			sprintf(next->ip,"%s",tmp_ip);
+			count++;
         };
     }
-    return 0;
+    return count;
+}
+
+int free_iplist(struct ip_list* ip_list)
+{
+	struct ip_list* next=ip_list;
+	struct ip_list* temp;
+	while(next){
+		free(next->ip);
+		temp=next->next;
+		free(next);
+		next=temp;
+	}
 }
