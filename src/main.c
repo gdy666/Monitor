@@ -10,6 +10,7 @@
 
 #include "feixin.h"
 #include "monitor.h"
+#include "yeelink.h"
 
 #define DEBUG
 
@@ -33,9 +34,14 @@ int main()
 //	get_broadip(&ip_list);
 //	struct ip_list* next=ip_list;
 //	while(next){
-//	//	printf("IP:%s\n",next->ip);
-//		send_broadcast(next->ip,1110,"update info");
+//		printf("IP:%s\n",next->ip);
+//		send_broadcast(next->ip,1111,"who is here?");
 //		next=next->next;
 //	}
 //	free_iplist(ip_list);
+//	char* result=(char*)calloc(512,sizeof(char));
+//	get_datapoint(4417,6641,"6edcfb225b401db3bb165aa4c25a4d19",result);
+//	struct yee_switch sw;
+//	get_switch(4417,6641,"6edcfb225b401db3bb165aa4c25a4d19",&sw);
+	return 0;
 }

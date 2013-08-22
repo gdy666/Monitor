@@ -10,13 +10,15 @@
 #ifndef MONITOR_H_
 #define MONITOR_H_
 
-#include "netutil.h"
 #include <pthread.h>
 #include "serialib.h"
 #include "sensor.h"
 #include "feixin.h"
 
-#define MONI_PORT 1110	//监听的端口，客户端也用这个端口作为接送广播
+#define MONI_PORT 1110	//监听的端口，
+#define CLI_PORT 1111	//客户端接收广播的端口
+#define SER_ORDER "who is here?"
+#define CLI_REPLY "I'm here!"
 
 //新线程中启动监控程序
 int start_monitor();
