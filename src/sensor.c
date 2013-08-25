@@ -10,8 +10,6 @@
 #define DHT11_ORDER "DHT11"
 //#include "includes.h"
 
-//extern char serial_port[];
-char serial_port[]="/dev/ttyACM0";
 int get_dht11(serial *s,struct DHT11* data)
 {
 	int state=0;

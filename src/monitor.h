@@ -13,7 +13,9 @@
 #include <pthread.h>
 #include "serialib.h"
 #include "sensor.h"
-#include "feixin.h"
+#include "fetion.h"
+#include "yeelink.h"
+#include "monitor_ini.h"
 
 #define MONI_PORT 1110	//监听的端口，
 #define CLI_PORT 1111	//客户端接收广播的端口

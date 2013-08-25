@@ -23,4 +23,9 @@ int post_with_argv(const char* URL,const char* argv,char* result);
 
 int get_with_argv(const char* URL,const char* argv,char* result);
 
+/*
+ * post操作，目的为了取得Cookies
+ */
+int postGetCookies(const char* URL,const char* argv,char* cookie);
+
 #endif /* CURLUTIL_H_ */

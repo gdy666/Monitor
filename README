@@ -1,2 +1,7 @@
-基于linux C的XXX
+arduino+linux C基于热释电红外传感器监控兼短信警报系统   
   
+首发于：http://yeso.me/?p=597   
+
+1.sensor.ino 为arduino的源码   
+2.系统中使用的飞信接口： https://github.com/ljymc/fetion   
+3.配置文件Monitor.conf放在/etc目录下。  
