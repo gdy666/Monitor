@@ -29,7 +29,7 @@ int main()
 {
 	curl_global_init(CURL_GLOBAL_ALL);
 	start_monitor();
-	while(1);
+//	while(1);
 	curl_global_cleanup();
 	return 0;
 }

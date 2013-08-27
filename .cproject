@@ -161,6 +161,7 @@
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/Monitor"/>
 		</configuration>
+		<configuration configurationName="hg255d"/>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/Monitor"/>
 		</configuration>

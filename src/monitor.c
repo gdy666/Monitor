@@ -57,7 +57,8 @@ int start_monitor()
 	Init_MonitorConf();	//读取配置文件
 	pth_serialMonitor();//监听串口的线程
 
-	pth_sendFetion();	//负责发送飞信的线程
+	pthread_t p_t=pth_sendFetion();	//负责发送飞信的线程
+	pthread_join(p_t,NULL);
 	return 0;
 }
 
@@ -102,7 +103,7 @@ int serialMonitor()
 				//feixin_count+=MSGRepeat;
 				sign=1;
 				debug("sign=%d\n",sign);
-				sleep(20);
+				sleep(30);	//检测到异常后标记发送飞信，然后30内不再检测
 			}
 			else{
 				debug("监控开关状态：关！\n");
@@ -123,26 +124,25 @@ int pth_sendFetion()
 		debug("创建监听线程失败!\n");
 		exit(1);
 	}
-	return 0;
+	return p_t;
 }
 
 int sendFetion()
 {
 	int ret;
 	while(1){
-		debug("sign:%d\n",sign);
-		sleep(1);
+	//	debug("sign:%d\n",sign);
 		if(sign == 1){
 			//debug("user:%s passwd:%s to:%s content:%s\n",fetionUser,fetionPasswd,
 			//		fetionTo,fetionContent);
 			ret=sendFetionByPHPAPI(fetionUser,fetionPasswd,fetionTo,fetionContent,MSGRepeat);
-			debug("ret:%d\n",ret);
+			//debug("ret:%d\n",ret);
 			if(ret == 0){//发送成功
 				sign=0;
 				usleep(50000);
 			}
 		}
-
+		sleep(1);
 	}
 	return 0;
 }
